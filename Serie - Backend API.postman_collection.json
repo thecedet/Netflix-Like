@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "9589f71e-d245-4280-b7f6-8605ca46ee98",
+		"name": "Serie - Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5306419"
+	},
+	"item": [
+		{
+			"name": "Série",
+			"item": [
+				{
+					"name": "Récupérer toutes les series",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer une série (par ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout d'une série",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Mon voisin titi\",\r\n    \"description\": \"Deux petites filles, Mei, quatre ans, et Satsuki, 10 ans, s'installent dans une grande maison à la campagne avec leur père pour se rapprocher de l'hôpital où séjourne leur mère.\",\r\n    \"date_sortie\": \"08-12-1999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une série (par ID)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date_sortie\": \"12-12-2800\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une série (par ID)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Commentaire",
+			"item": [
+				{
+					"name": "Ajout d'un commentaire",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auteur\": \"Clément\",\r\n    \"note\": 4,\r\n    \"commentaire\": \"ça passe mais c'est pour les enfants\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series/1/commentaire",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1",
+								"commentaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer commentaire",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commentaires/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commentaires",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un commentaire",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentaire\": \"ça passe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/commentaires/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commentaires",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "S3",
+			"item": [
+				{
+					"name": "Obtenir URL pour poster image lien upload (exocover)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/1/cover",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1",
+								"cover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Envoyer Image sur S3",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/PC/Desktop/Dessin1.png"
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9000/exocover/1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=VuHtZ5Cl5gLInCfACP5D%2F20231125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231125T142442Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=188c5b6f78ea478276a10d037f686fd07f6e4c28e6755f3edd9d00dd5978a886",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"exocover",
+								"1.png"
+							],
+							"query": [
+								{
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
+								},
+								{
+									"key": "X-Amz-Credential",
+									"value": "VuHtZ5Cl5gLInCfACP5D%2F20231125%2Fus-east-1%2Fs3%2Faws4_request"
+								},
+								{
+									"key": "X-Amz-Date",
+									"value": "20231125T142442Z"
+								},
+								{
+									"key": "X-Amz-Expires",
+									"value": "604800"
+								},
+								{
+									"key": "X-Amz-SignedHeaders",
+									"value": "host"
+								},
+								{
+									"key": "X-Amz-Signature",
+									"value": "188c5b6f78ea478276a10d037f686fd07f6e4c28e6755f3edd9d00dd5978a886"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtenir URL pour récupérer image",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
