@@ -1,3 +1,7 @@
-<p>detail-page works!</p>
-
-<img [src]="image" alt="Place image title">
+<p>detail-page works!</p> 
+<ng-container *ngIf="$image | async as imgsrc">
+    <div *ngIf="imgsrc.code == 'GET_COVER_URL'; else test">
+        <img  [src]="imgsrc.message" alt="Place image title">
+    </div>
+    <ng-template #test> pas image</ng-template>
+</ng-container>
