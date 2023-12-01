@@ -1,7 +1,5 @@
 package fr.polytech.netflixbackend.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import fr.polytech.netflixbackend.dto.request.CommentaireDtoCreate;
@@ -42,15 +40,6 @@ public class CommentaireService {
         this.getCommentaire(id);
         this.commentaireRepository.deleteById(id);
         return "Le commentaire vient d'être supprimé";
-    }
-
-    public static float getMoyenne(List<CommentaireEntity> commentaires) {
-        final Integer nbrCommentaire = commentaires.size();
-        if(nbrCommentaire == 0) return 5;
-        return commentaires.stream()
-            .map(commentaire -> commentaire.getNote())
-            .reduce(0, (notes, note) -> notes + note)
-            /nbrCommentaire;
     }
 
     public CommentaireEntity editCommentaire(Integer id, CommentaireDtoUpdate Commentairedto) {

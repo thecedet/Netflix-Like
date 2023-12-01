@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.polytech.netflixbackend.entity.SerieEntity;
-import fr.polytech.netflixbackend.service.CommentaireService;
+import fr.polytech.netflixbackend.helper.CalculMoyenne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class SerieDto {
             .coverUrl(coverUrl)
             .description(serieEntity.getDescription())
             .dateSortie(serieEntity.getDateSortie())
-            .noteMoyenne(CommentaireService.getMoyenne(serieEntity.getCommentaires()))
+            .noteMoyenne(CalculMoyenne.getMoyenne(serieEntity.getCommentaires()))
             .commentaires(serieEntity.getCommentaires().stream().map(
                 commentaire -> CommentaireDto.convertEntitytoDto(commentaire)).toList()
             )
