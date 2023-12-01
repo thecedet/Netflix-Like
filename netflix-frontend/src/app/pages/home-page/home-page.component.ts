@@ -19,10 +19,10 @@ export class HomePageComponent {
     
   }
 
-  ngOnInit(): void {
-    this.serieService.getSeries().subscribe({
-        next: series => this.series = series
-    })
-}
+    ngOnInit(): void {
+        this.serieService.getSeries().subscribe({
+            next: series => this.series = series
+        })
+    }
 
 }

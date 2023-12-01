@@ -12,19 +12,19 @@ export class TableYellowOrRedDirective {
             this.renderer.setStyle(
                 this.elRef.nativeElement,
                 "background-color",
-                "green"
+                "#2ecc71"
             );    
         }else if(parseInt(value) >= 3) {
             this.renderer.setStyle(
                 this.elRef.nativeElement,
                 "background-color",
-                "yellow"
+                "#f1c40f"
             );
         }else {
             this.renderer.setStyle(
                 this.elRef.nativeElement,
                 "background-color",
-                "red"
+                "#e74c3c"
             );
         }
     }
