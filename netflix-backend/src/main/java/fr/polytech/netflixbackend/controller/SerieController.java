@@ -15,6 +15,7 @@ import fr.polytech.netflixbackend.dto.request.SerieDtoCreate;
 import fr.polytech.netflixbackend.dto.request.SerieDtoUpdate;
 import fr.polytech.netflixbackend.dto.response.MessageDto;
 import fr.polytech.netflixbackend.dto.response.SerieDto;
+import fr.polytech.netflixbackend.service.S3Service;
 import fr.polytech.netflixbackend.service.SerieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,26 +26,31 @@ public class SerieController {
     
     private final SerieService serieService;
 
+    private final S3Service s3Service;
+
     @GetMapping("/series")
     public @ResponseBody List<SerieDto> getSeries() {
         return serieService.getSeries().stream().map(
-            serie -> SerieDto.convertEntitytoDto(serie)
+            serie -> {
+                final String url = this.s3Service.getGetCoverUrl(serie.getId());
+                return SerieDto.convertEntitytoDto(serie,url);
+            }
         ).toList();
     }
 
     @GetMapping("/series/{id}")
     public @ResponseBody SerieDto getSerie(@PathVariable Integer id) {
-        return SerieDto.convertEntitytoDto(serieService.getSerie(id));
+        return SerieDto.convertEntitytoDto(serieService.getSerie(id), this.s3Service.getGetCoverUrl(id));
     }
 
     @PostMapping("/series")
     public @ResponseBody SerieDto addSerie(@Valid @RequestBody SerieDtoCreate serieDtoCreate) {
-        return SerieDto.convertEntitytoDto(serieService.addSerie(serieDtoCreate));
+        return SerieDto.convertEntitytoDto(serieService.addSerie(serieDtoCreate),null);
     }
 
     @PutMapping("/series/{id}")
     public @ResponseBody SerieDto editSerie(@PathVariable Integer id, @Valid @RequestBody SerieDtoUpdate serieDtoUpdate) {
-        return SerieDto.convertEntitytoDto(serieService.editSerie(id, serieDtoUpdate));
+        return SerieDto.convertEntitytoDto(serieService.editSerie(id, serieDtoUpdate),this.s3Service.getGetCoverUrl(id));
     }
 
     @DeleteMapping("/series/{id}")

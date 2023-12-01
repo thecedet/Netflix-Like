@@ -28,6 +28,9 @@ public class SerieDto {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("coverUrl")
+    private String coverUrl;
+
     @JsonProperty("date_sortie")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateSortie;
@@ -38,10 +41,11 @@ public class SerieDto {
     @JsonProperty("note_moyenne")
     private float noteMoyenne;
 
-    public static SerieDto convertEntitytoDto(SerieEntity serieEntity) {
+    public static SerieDto convertEntitytoDto(final SerieEntity serieEntity, final String coverUrl) {
         return SerieDto.builder()
             .id(serieEntity.getId())
             .nom(serieEntity.getNom())
+            .coverUrl(coverUrl)
             .description(serieEntity.getDescription())
             .dateSortie(serieEntity.getDateSortie())
             .noteMoyenne(CommentaireService.getMoyenne(serieEntity.getCommentaires()))

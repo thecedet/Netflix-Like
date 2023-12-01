@@ -3,11 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, catchError, map, of } from "rxjs";
 import { SerieDto } from "../models/serie.dto";
 import { MessageDto } from '../models/message.dto';
+import { SerieCreateDto } from "../models/serie.create.dto";
 
 @Injectable({
     providedIn: 'root'
 })
 export class SerieService {
+    
     constructor(private httpClient: HttpClient) {
 
     }
@@ -20,6 +22,10 @@ export class SerieService {
         return this.httpClient.get<MessageDto>(`http://localhost:8080/series/${id}/cover`).pipe(
             catchError(error => of(error.error))
         );
+    }
+
+    createSerie(serie: SerieCreateDto) : Observable<SerieDto> {
+        return this.httpClient.post<SerieDto>("http://localhost:8080/series", serie);
     }
 
 }

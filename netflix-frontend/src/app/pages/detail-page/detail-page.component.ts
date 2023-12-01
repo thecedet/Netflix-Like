@@ -14,7 +14,7 @@ import { Observable, map, tap } from 'rxjs';
 })
 export class DetailPageComponent {
 
-  public $image : Observable<MessageDto> ;
+  public $image? : Observable<MessageDto>;
   private id : string = this.activatedRoute.snapshot.params["id"]
 
   constructor(private serieService : SerieService, private activatedRoute : ActivatedRoute) {

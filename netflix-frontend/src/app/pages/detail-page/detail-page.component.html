@@ -1,4 +1,3 @@
-<p>detail-page works!</p> 
 <ng-container *ngIf="$image | async as imgsrc">
     <div *ngIf="imgsrc.code == 'GET_COVER_URL'; else test">
         <img  [src]="imgsrc.message" alt="Place image title">
