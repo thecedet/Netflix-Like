@@ -18,13 +18,13 @@ export class SerieService {
         return this.httpClient.get<SerieDto[]>(`http://localhost:8080/series`)
     }
 
-    getPresignedUrl(id: string): Observable<MessageDto> {
+    public getPresignedUrl(id: string): Observable<MessageDto> {
         return this.httpClient.get<MessageDto>(`http://localhost:8080/series/${id}/cover`).pipe(
             catchError(error => of(error.error))
         );
     }
 
-    createSerie(serie: SerieCreateDto) : Observable<SerieDto> {
+    public createSerie(serie: SerieCreateDto) : Observable<SerieDto> {
         return this.httpClient.post<SerieDto>("http://localhost:8080/series", serie);
     }
 
