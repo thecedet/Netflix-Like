@@ -1,6 +1,5 @@
 package fr.polytech.netflixbackend.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.minio.GetPresignedObjectUrlArgs;
@@ -15,12 +14,12 @@ public class S3Service {
     private final MinioClient minioClient;
     private final SerieService serieService;
 
-    @Value("${s3.bucketName.cover}")
-    public String coverBucketName;
+    /*@Value("${s3.bucketName.cover}")
+    public final String coverBucketName = "exocover";
  
-    @Value("${s3.bucketName.screenshot}")
-    public String screenshotBucketName; 
- 
+    //@Value("${s3.bucketName.screenshot}")
+    public final String screenshotBucketName; 
+    */
 
     private String getPresignedUrl(Method method, String bucketName, String objectName) {
         try {
@@ -38,11 +37,11 @@ public class S3Service {
     }
 
     public String getGetCoverUrl(Integer id) {
-        return this.getGetUrl(coverBucketName, id);
+        return this.getGetUrl("exocover", id);
     }
 
     public String getPutCoverUrl(Integer id, String extension) {
-        return this.getPutUrl(coverBucketName, id, extension);
+        return this.getPutUrl("exocover", id, extension);
     }
 
     public String getGetUrl(String bucketName, Integer id) {

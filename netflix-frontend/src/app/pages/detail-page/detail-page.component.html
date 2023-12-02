@@ -1,9 +1,10 @@
-<ng-container *ngIf="image">
+<ng-container *ngIf="image; else loading">
     <div *ngIf="image.code == 'GET_COVER_URL'; else test">
         <img  [src]="image.message" alt="Place image title">
     </div>
     <ng-template #test> pas image</ng-template>
 </ng-container>
+<ng-template #loading>Chargement</ng-template>
 
 <br />
 

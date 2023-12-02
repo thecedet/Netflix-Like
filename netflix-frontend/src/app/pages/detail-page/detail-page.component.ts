@@ -13,14 +13,11 @@ import { InputFileComponent } from '../../components/input-file/input-file.compo
     imports: [CommonModule, InputFileComponent]
 })
 export class DetailPageComponent {
-setState() {
-throw new Error('Method not implemented.');
-}
 
   public image ?: MessageDto;
   private id : string = this.activatedRoute.snapshot.params["id"]
 
-  @ViewChild(InputFileComponent, { static: false })
+  @ViewChild(InputFileComponent)
   inputFileComponent ?: InputFileComponent;
 
   constructor(private serieService : SerieService, private activatedRoute : ActivatedRoute) {
@@ -38,9 +35,9 @@ throw new Error('Method not implemented.');
   }
   
   uploadCover(file : File) : void {
-    this.serieService.postImage(this.id,file).subscribe(_ => {
+    this.serieService.postImage(this.id,file).subscribe(response => {
       this.fetchImage()
-      if(this.inputFileComponent) this.inputFileComponent.setState(true)
+      if(this.inputFileComponent) this.inputFileComponent.setState(response === null)
     })
   }
 

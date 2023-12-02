@@ -32,8 +32,11 @@ export class SerieService {
 
         return this.httpClient.post<MessageDto>(`${this.baseURL}/${id}/cover`, {}).pipe(
             mergeMap((response: MessageDto) => {
-                return this.httpClient.put<MessageDto>(response.message, file)  
-            })
+                return this.httpClient.put<MessageDto>(response.message, file).pipe(
+                    catchError(error => of(error.error))
+                )
+            }),
+            catchError(error => of(error.error))
         )
     }
 
