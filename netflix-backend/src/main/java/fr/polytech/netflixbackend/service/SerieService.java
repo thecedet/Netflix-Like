@@ -3,10 +3,12 @@ package fr.polytech.netflixbackend.service;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import fr.polytech.netflixbackend.dto.request.SerieDtoCreate;
 import fr.polytech.netflixbackend.dto.request.SerieDtoUpdate;
+import fr.polytech.netflixbackend.entity.ActeurEntity;
 import fr.polytech.netflixbackend.entity.SerieEntity;
 import fr.polytech.netflixbackend.exception.ResourceNotFoundException;
 import fr.polytech.netflixbackend.repository.SerieRepository;
@@ -17,6 +19,12 @@ import lombok.AllArgsConstructor;
 public class SerieService {
     
     private final SerieRepository serieRepository;
+
+    private final S3Service s3Service;
+    private final ActeurService acteurService;
+
+    @Value("${s3.bucketName.cover}")
+    public final String serieBucket = null;
 
     public List<SerieEntity> getSeries() {
         return serieRepository.findAllByOrderByDateSortie();
@@ -34,6 +42,7 @@ public class SerieService {
             .description(serieDtoCreate.getDescription())
             .dateSortie(serieDtoCreate.getDateSortie())
             .commentaires(Collections.emptyList())
+            .acteurs(Collections.emptyList())
             .build();
         
         serieRepository.save(serieEntity);
@@ -58,20 +67,30 @@ public class SerieService {
         return "La série vient d'être supprimée";
     }
 
-    public void addCover(Integer id, String extension) {
-        final SerieEntity serie = this.getSerie(id);
-        serie.setJacquette(extension);
-        serieRepository.save(serie);
+    public String getImage(Integer id) {
+        SerieEntity serie = this.getSerie(id);
+        if(!serie.isJacquette()) {
+            throw new ResourceNotFoundException("L'acteur n'a pas d'image");
+        }
+
+        return s3Service.getImageUrl(id, serieBucket);
     }
 
-    public String getCover(Integer id) {
-        final SerieEntity serie = this.getSerie(id);
-        final String jacquette = serie.getJacquette();
+    public String putImage(Integer id) {
+        SerieEntity serie = this.getSerie(id);
+        serie.setJacquette(true);
+        serieRepository.save(serie);
+        return s3Service.getImageUrl(id, serieBucket);
+    }
 
-        if(jacquette == null) {
-            throw new ResourceNotFoundException("La série n'a pas de jacquette");
-        }
-        return id+jacquette;
+    public SerieEntity addActeur(Integer idSerie, Integer idActeur) {
+        ActeurEntity acteur = acteurService.getActeur(idActeur);
+        SerieEntity serie = this.getSerie(idSerie);
+
+        serie.getActeurs().add(acteur);
+        serieRepository.save(serie);
+
+        return serie;
     }
     
 }

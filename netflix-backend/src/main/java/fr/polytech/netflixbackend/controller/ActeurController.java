@@ -55,4 +55,20 @@ public class ActeurController {
             .build();
     }
 
+    @PutMapping("/acteurs/{id}/image")
+    public @ResponseBody MessageDto putImage(@PathVariable Integer id) {
+        return MessageDto.builder()
+            .code("GET_IMAGE_URL")
+            .message(this.acteurService.putImage(id))
+            .build();
+    }
+
+    @GetMapping("/acteurs/{id}/image")
+    public @ResponseBody MessageDto getImage(@PathVariable Integer id) {
+        return MessageDto.builder()
+            .code("GET_IMAGE_URL")
+            .message(this.acteurService.getImage(id))
+            .build();
+    }
+
 }

@@ -18,3 +18,4 @@ s3:
     bucketName:
         cover: "exocover"
         screenshot: "exoscreenshot"
+        acteur: "exoacteur"

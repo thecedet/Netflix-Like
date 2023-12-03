@@ -2,6 +2,7 @@ package fr.polytech.netflixbackend.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -58,6 +59,12 @@ public class ExceptionConfig {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody ErrorMessageDto badrequest(HttpMessageNotReadableException ex) {
         return ErrorMessageDto.builder().code("BAD_REQUEST").message(ex.getMessage()).build();
+    }
+
+    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public @ResponseBody ErrorMessageDto badrequest(HttpRequestMethodNotSupportedException ex) {
+        return ErrorMessageDto.builder().code("NOT_FOUND").message(ex.getMessage()).build();
     }
 
 }

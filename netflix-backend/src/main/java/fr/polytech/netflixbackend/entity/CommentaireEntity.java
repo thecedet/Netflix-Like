@@ -46,9 +46,9 @@ public class CommentaireEntity {
     @Column(
         name = "screenshot",
         nullable = true,
-        columnDefinition = "varchar(4)"
+        columnDefinition = "boolean"
     )
-    private String screenshot;
+    private boolean screenshot;
 
     @ManyToOne
     @JoinColumn(name = "serie_id")

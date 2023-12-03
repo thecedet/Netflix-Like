@@ -44,10 +44,10 @@ public class SerieEntity {
 
     @Column(
         name = "jacquette",
-        columnDefinition = "varchar(4)",
+        columnDefinition = "boolean",
         nullable = true
     )
-    private String jacquette;
+    private boolean jacquette;
 
     @Column(
         name = "dateSortie",
@@ -62,7 +62,7 @@ public class SerieEntity {
     )
     private List<CommentaireEntity> commentaires;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
         name = "serie_jn_acteur",
         joinColumns = @JoinColumn(name="id_acteur"),

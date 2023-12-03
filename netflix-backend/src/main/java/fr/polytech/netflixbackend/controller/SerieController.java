@@ -15,7 +15,6 @@ import fr.polytech.netflixbackend.dto.request.SerieDtoCreate;
 import fr.polytech.netflixbackend.dto.request.SerieDtoUpdate;
 import fr.polytech.netflixbackend.dto.response.MessageDto;
 import fr.polytech.netflixbackend.dto.response.SerieDto;
-import fr.polytech.netflixbackend.service.S3Service;
 import fr.polytech.netflixbackend.service.SerieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,31 +25,26 @@ public class SerieController {
     
     private final SerieService serieService;
 
-    private final S3Service s3Service;
-
     @GetMapping("/series")
     public @ResponseBody List<SerieDto> getSeries() {
         return serieService.getSeries().stream().map(
-            serie -> {
-                final String url = this.s3Service.getGetCoverUrl(serie.getId());
-                return SerieDto.convertEntitytoDto(serie,url);
-            }
+            serie -> SerieDto.convertEntitytoDto(serie)
         ).toList();
     }
 
     @GetMapping("/series/{id}")
     public @ResponseBody SerieDto getSerie(@PathVariable Integer id) {
-        return SerieDto.convertEntitytoDto(serieService.getSerie(id), this.s3Service.getGetCoverUrl(id));
+        return SerieDto.convertEntitytoDto(serieService.getSerie(id));
     }
 
     @PostMapping("/series")
     public @ResponseBody SerieDto addSerie(@Valid @RequestBody SerieDtoCreate serieDtoCreate) {
-        return SerieDto.convertEntitytoDto(serieService.addSerie(serieDtoCreate),null);
+        return SerieDto.convertEntitytoDto(serieService.addSerie(serieDtoCreate));
     }
 
     @PutMapping("/series/{id}")
     public @ResponseBody SerieDto editSerie(@PathVariable Integer id, @Valid @RequestBody SerieDtoUpdate serieDtoUpdate) {
-        return SerieDto.convertEntitytoDto(serieService.editSerie(id, serieDtoUpdate),this.s3Service.getGetCoverUrl(id));
+        return SerieDto.convertEntitytoDto(serieService.editSerie(id, serieDtoUpdate));
     }
 
     @DeleteMapping("/series/{id}")
@@ -59,6 +53,27 @@ public class SerieController {
             .code("OK_DELETE")
             .message(this.serieService.deleteSerie(id))
             .build();
+    }
+
+    @PutMapping("/series/{id}/image")
+    public @ResponseBody MessageDto putImage(@PathVariable Integer id) {
+        return MessageDto.builder()
+            .code("GET_IMAGE_URL")
+            .message(this.serieService.putImage(id))
+            .build();
+    }
+
+    @GetMapping("/series/{id}/image")
+    public @ResponseBody MessageDto getImage(@PathVariable Integer id) {
+        return MessageDto.builder()
+            .code("GET_IMAGE_URL")
+            .message(this.serieService.getImage(id))
+            .build();
+    }
+
+    @PostMapping("/series/{id_serie}/acteur/{id_acteur}")
+    public @ResponseBody SerieDto addActeur(@PathVariable(name = "id_serie") Integer idSerie, @PathVariable(name = "id_acteur") Integer idActeur) {
+        return SerieDto.convertEntitytoDto(serieService.addActeur(idSerie, idActeur));
     }
 
 }

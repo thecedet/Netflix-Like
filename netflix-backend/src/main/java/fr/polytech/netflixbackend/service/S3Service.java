@@ -12,14 +12,6 @@ import lombok.AllArgsConstructor;
 public class S3Service {
     
     private final MinioClient minioClient;
-    private final SerieService serieService;
-
-    /*@Value("${s3.bucketName.cover}")
-    public final String coverBucketName = "exocover";
- 
-    //@Value("${s3.bucketName.screenshot}")
-    public final String screenshotBucketName; 
-    */
 
     private String getPresignedUrl(Method method, String bucketName, String objectName) {
         try {
@@ -36,21 +28,11 @@ public class S3Service {
         return "";
     }
 
-    public String getGetCoverUrl(Integer id) {
-        return this.getGetUrl("exocover", id);
+    public String getImageUrl(Integer id, String acteurBucket) {
+        return this.getPresignedUrl(Method.GET, acteurBucket, String.valueOf(id));
     }
 
-    public String getPutCoverUrl(Integer id, String extension) {
-        return this.getPutUrl("exocover", id, extension);
-    }
-
-    public String getGetUrl(String bucketName, Integer id) {
-        return this.getPresignedUrl(Method.GET, bucketName, this.serieService.getCover(id));
-    }
-
-    public String getPutUrl(String bucketName, Integer id, String extension) {
-        this.serieService.addCover(id, extension);
-        final String objectName = id + extension;
-        return this.getPresignedUrl(Method.PUT, bucketName, objectName);
+    public String putImageUrl(Integer id, String acteurBucket) {
+        return this.getPresignedUrl(Method.PUT, acteurBucket, String.valueOf(id));
     }
 }

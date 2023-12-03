@@ -48,7 +48,6 @@ public class CommentaireService {
         if(Commentairedto.getAuteur() != null) commentaire.setAuteur(Commentairedto.getAuteur());
         if(Commentairedto.getNote() != null) commentaire.setNote(Commentairedto.getNote());
         if(Commentairedto.getCommentaire() != null) commentaire.setCommentaire(Commentairedto.getCommentaire());
-        if(Commentairedto.getScreenshot() != null) commentaire.setScreenshot(Commentairedto.getScreenshot());
 
         commentaireRepository.save(commentaire);
 
