@@ -15,6 +15,7 @@ import fr.polytech.netflixbackend.dto.request.SerieDtoCreate;
 import fr.polytech.netflixbackend.dto.request.SerieDtoUpdate;
 import fr.polytech.netflixbackend.dto.response.MessageDto;
 import fr.polytech.netflixbackend.dto.response.SerieDto;
+import fr.polytech.netflixbackend.dto.response.SerieSommaireDto;
 import fr.polytech.netflixbackend.service.SerieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,9 @@ public class SerieController {
     private final SerieService serieService;
 
     @GetMapping("/series")
-    public @ResponseBody List<SerieDto> getSeries() {
+    public @ResponseBody List<SerieSommaireDto> getSeries() {
         return serieService.getSeries().stream().map(
-            serie -> SerieDto.convertEntitytoDto(serie)
+            serie -> SerieSommaireDto.convertEntitytoDto(serie)
         ).toList();
     }
 
