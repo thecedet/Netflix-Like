@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
-import { IActeur } from '../models/acteur.models';
+import { IActeur, IActeurCreate } from '../models/acteur.models';
 import { IMessage } from '../models/message.models';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class ActeurService {
     return this.httpClient.get<IMessage>(`${this.baseURL}/${id}/image`).pipe(
         catchError(error => of(error.error))
     );
-}
+  }
+
+  public createActeur(acteur : IActeurCreate) : Observable<IActeur> {
+    return this.httpClient.post<IActeur>(this.baseURL, acteur);
+  }
 
 }
