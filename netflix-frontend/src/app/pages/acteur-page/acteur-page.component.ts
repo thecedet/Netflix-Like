@@ -51,7 +51,7 @@ export class ActeurPageComponent {
                     nom: ""
                 } as IActeur
             }
-        })
+        }, () => this.ntfService.error("Création de l'acteur avec erreur"))
     }
 
 }

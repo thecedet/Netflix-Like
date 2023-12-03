@@ -3,6 +3,12 @@ export interface IActeurCreate {
     prenom: string
 }
 
+export interface IActeurUpdate {
+    nom: string,
+    prenom: string,
+    image?: string, 
+}
+
 export interface IActeur {
     id: number
     nom: string,
