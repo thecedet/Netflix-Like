@@ -1,0 +1,22 @@
+div {
+    display: flex;
+}
+
+div > div {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    justify-content: center;
+    background-color: var(--primary);
+    padding: .2em;
+    cursor: pointer;
+}
+
+div > div:hover {
+    opacity: .5;
+}
+
+span {
+    text-align: center;
+    font-weight: bold;
+}

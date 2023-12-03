@@ -1,1 +1,6 @@
-<p>acteur-list works!</p>
+<div>
+    <div *ngFor="let acteur of acteurs" (click)="navigateToDetails(acteur.id)">
+        <img *ngIf="acteur.image" src="{{acteur.image}}"/>
+        <span>{{acteur.nom}} {{acteur.prenom}}</span>
+    </div>
+</div>
