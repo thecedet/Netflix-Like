@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, mergeMap, of } from 'rxjs';
 import { IActeur, IActeurCreate, IActeurUpdate } from '../models/acteur.models';
 import { IMessage } from '../models/message.models';
 
@@ -33,6 +33,14 @@ export class ActeurService {
 
   public updateActeur(id : string, acteur: IActeurUpdate) : Observable<IActeur> {
     return this.httpClient.put<IActeur>(`${this.baseURL}/${id}`, acteur);
+  }
+
+  public uploadImage(id: string, file: File) : Observable<IMessage> {
+    return this.httpClient.put<IMessage>(`${this.baseURL}/${id}/image`, {}).pipe(
+      mergeMap((response : IMessage) => {
+        return this.httpClient.put<IMessage>(response.message, file)
+      }), catchError(error => of(error.error))
+    );
   }
 
 }

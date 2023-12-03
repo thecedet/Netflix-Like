@@ -26,6 +26,6 @@ export class ActeurListComponent {
 
   public onErrorImage() : void {
     this.ntfService.error("Impossible de charger les images")
-}
+  }
 
 }

@@ -5,19 +5,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IActeur, IActeurUpdate } from '../../models/acteur.models';
 import { Observable } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
+import { InputFileComponent } from "../../components/input-file/input-file.component";
+import { ActeurDetailsImageComponent } from "./acteur-details-image/acteur-details-image.component";
+import { IMessage } from '../../models/message.models';
 
 @Component({
     selector: 'app-acteur-details-page',
     standalone: true,
     templateUrl: './acteur-details-page.component.html',
     styleUrl: './acteur-details-page.component.css',
-    imports: [ActeurDetailsFormComponent]
+    imports: [ActeurDetailsFormComponent, InputFileComponent, ActeurDetailsImageComponent]
 })
 export class ActeurDetailsPageComponent {
 
     private id : string = this.activatedRoute.snapshot.params["id"]
     @ViewChild(ActeurDetailsFormComponent)
     private acteurForm ?: ActeurDetailsFormComponent;
+    @ViewChild(ActeurDetailsImageComponent)
+    private imageComponent ?: ActeurDetailsImageComponent;
 
     constructor(
         private readonly acteurService : ActeurService,
@@ -31,8 +36,9 @@ export class ActeurDetailsPageComponent {
     }
 
     private getActeur(id : string) : void {
-        this.acteurService.getActeur(id).subscribe((value : IActeur) => {
-            if(this.acteurForm) this.acteurForm.acteur = value;
+        this.acteurService.getActeur(id).subscribe((acteur : IActeur) => {
+            if(this.acteurForm) this.acteurForm.acteur = acteur;
+            this.getImage()
         }, () => this.router.navigate([`404`]))
     }
 
@@ -40,6 +46,23 @@ export class ActeurDetailsPageComponent {
         this.acteurService.updateActeur(this.id, acteur).subscribe({
             complete: () => this.ntfService.success("Update de l'acteur avec succès"),
             error: () => this.ntfService.error("Update de l'acteur avec erreur")
+        })
+    }
+
+    private getImage() : void {
+        this.acteurService.getPresignedUrl(Number(this.id)).subscribe((message : IMessage) => {
+            if(!this.imageComponent) return
+            this.imageComponent.image = message;
+        })
+    }
+
+    public uploadImage(file : File) : void {
+        this.acteurService.uploadImage(this.id, file).subscribe((response : IMessage) => {
+            if(response === null) {
+                this.ntfService.success("upload succès")
+                this.getImage()
+                if(this.imageComponent) this.imageComponent.image = response;
+            }else this.ntfService.error("Impossible d'upload l'image")
         })
     }
 

@@ -11,17 +11,17 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class InputFileComponent {
 
-  file ?: File;
+  public file ?: File;
 
-  @Output() public uploadCover : EventEmitter<File> = new EventEmitter();
+  @Output() public uploadFile : EventEmitter<File> = new EventEmitter();
 
   constructor(private ntfService : NotificationService) {}
 
   public setState(state : boolean) : void {
     if(state) {
-      this.ntfService.success("L'image s'est bien téléversée", 2000);
+      this.ntfService.success("L'image s'est bien téléversée");
     }else {
-      this.ntfService.error("Erreur pendant le téléversement", 2000);
+      this.ntfService.error("Erreur pendant le téléversement");
     }
   }
   
@@ -35,8 +35,8 @@ export class InputFileComponent {
 
   public onUpload() : void {
     if(this.file) {
-      this.ntfService.warning("Téléversement en cours de l'image", 2000)
-      this.uploadCover.emit(this.file)
+      this.ntfService.warning("Téléversement en cours de l'image")
+      this.uploadFile.emit(this.file)
     }
   }
 
