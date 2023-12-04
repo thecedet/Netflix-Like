@@ -19,10 +19,9 @@ import { IMessage } from '../../models/message.models';
 export class ActeurDetailsPageComponent {
 
     private id : string = this.activatedRoute.snapshot.params["id"]
-    @ViewChild(ActeurDetailsFormComponent)
-    private acteurForm ?: ActeurDetailsFormComponent;
-    @ViewChild(ActeurDetailsImageComponent)
-    private imageComponent ?: ActeurDetailsImageComponent;
+
+    image?: IMessage;
+    acteur?: IActeur;
 
     constructor(
         private readonly acteurService : ActeurService,
@@ -37,7 +36,7 @@ export class ActeurDetailsPageComponent {
 
     private getActeur(id : string) : void {
         this.acteurService.getActeur(id).subscribe((acteur : IActeur) => {
-            if(this.acteurForm) this.acteurForm.acteur = acteur;
+            this.acteur = acteur;
             this.getImage()
         }, () => this.router.navigate([`404`]))
     }
@@ -51,8 +50,7 @@ export class ActeurDetailsPageComponent {
 
     private getImage() : void {
         this.acteurService.getPresignedUrl(Number(this.id)).subscribe((message : IMessage) => {
-            if(!this.imageComponent) return
-            this.imageComponent.image = message;
+            this.image = message;
         })
     }
 
@@ -61,7 +59,7 @@ export class ActeurDetailsPageComponent {
             if(response === null) {
                 this.ntfService.success("upload succès")
                 this.getImage()
-                if(this.imageComponent) this.imageComponent.image = response;
+                this.image = response;
             }else this.ntfService.error("Impossible d'upload l'image")
         })
     }

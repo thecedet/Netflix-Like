@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { IActeurUpdate } from '../../../models/acteur.models';
+import { IActeur, IActeurUpdate } from '../../../models/acteur.models';
 import { InputFileComponent } from '../../../components/input-file/input-file.component';
 
 @Component({
@@ -13,7 +13,14 @@ import { InputFileComponent } from '../../../components/input-file/input-file.co
 })
 export class ActeurDetailsFormComponent {
 
-  public acteur : IActeurUpdate = {
+  @Input() set acteur(value: IActeur | undefined) {
+    this.acteurUpdate = {
+      nom: value?.nom || "",
+      prenom: value?.prenom || ""
+    }
+ }
+
+  public acteurUpdate : IActeurUpdate = {
     nom: "",
     prenom: ""
   }
@@ -21,7 +28,7 @@ export class ActeurDetailsFormComponent {
   @Output() public updateActeur : EventEmitter<IActeurUpdate> = new EventEmitter();
 
   public submit(form: NgForm) : void {
-    if(form.valid) this.updateActeur.emit(this.acteur)
+    if(form.valid) this.updateActeur.emit(this.acteurUpdate)
   }
 
 }

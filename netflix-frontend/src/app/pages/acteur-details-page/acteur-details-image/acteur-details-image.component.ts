@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InputFileComponent } from "../../../components/input-file/input-file.component";
 import { CommonModule } from '@angular/common';
 import { IMessage } from '../../../models/message.models';
@@ -13,7 +13,7 @@ import { NotificationService } from '../../../services/notification.service';
 })
 export class ActeurDetailsImageComponent {
 
-    public image ?: IMessage;
+    @Input() public image ?: IMessage;
 
     @Output() public uploadImage : EventEmitter<File> = new EventEmitter();
 
