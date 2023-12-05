@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { IActeurCreate } from '../../../models/acteur.models';
+import { IActeur, IActeurCreate } from '../../../models/acteur.models';
 
 @Component({
     selector: 'app-acteur-form',
@@ -12,7 +12,14 @@ import { IActeurCreate } from '../../../models/acteur.models';
 })
 export class ActeurFormComponent {
 
-  public acteur : IActeurCreate = {
+  @Input() set acteur(value: IActeurCreate | undefined) {
+    this.acteur = {
+      nom: value?.nom || "",
+      prenom: value?.prenom || ""
+    }
+  }
+
+  public acteurUpdate : IActeurCreate = {
     nom: "",
     prenom: ""
   }
@@ -22,7 +29,10 @@ export class ActeurFormComponent {
   constructor() {}
 
   public submit(form : NgForm) : void {
-    if(form.valid) this.createActeur.emit(this.acteur)
+    if(form.valid) {
+      this.createActeur.emit(this.acteurUpdate)
+      form.reset(this.acteur)
+    }
   }
 
 }

@@ -32,7 +32,7 @@ public class SerieDtoCreate {
     private String description;
 
     @JsonProperty("date_sortie")
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Paramètre manquant : date_sortie")
     private LocalDate dateSortie;
 

@@ -7,7 +7,7 @@
     </div>
     <div>
       <label for="dateSortie">date de sortie&nbsp;:</label>
-      <input id="dateSortie" type="text" name="dateSortie" #dateSortie="ngModel" [(ngModel)]="serieUpdate.date_sortie" maxlength="50" required>
+      <input id="dateSortie" type="date" name="dateSortie" #dateSortie="ngModel" [(ngModel)]="serieUpdate.date_sortie" maxlength="50" required>
       <span style="color:#e74c3c" *ngIf="!dateSortie.valid && dateSortie.errors?.['required'] && dateSortie.dirty">Le champs est requis</span>
       <span style="color:#e74c3c" *ngIf="!dateSortie.valid && dateSortie.errors?.['maxlength'] && dateSortie.dirty">Le champs est trop long</span>
     </div>

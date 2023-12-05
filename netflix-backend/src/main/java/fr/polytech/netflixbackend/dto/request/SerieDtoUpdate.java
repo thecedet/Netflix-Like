@@ -26,7 +26,7 @@ public class SerieDtoUpdate {
     private String description;
 
     @JsonProperty(value = "date_sortie", required = false)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateSortie;
 
 }

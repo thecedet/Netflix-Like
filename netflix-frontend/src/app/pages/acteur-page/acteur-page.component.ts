@@ -15,9 +15,7 @@ import { NotificationService } from '../../services/notification.service';
 export class ActeurPageComponent {
 
     public acteurs : IActeur[] = [];
-
-    @ViewChild(ActeurFormComponent)
-    form?: ActeurFormComponent;
+    public acteur  ?: IActeurCreate;
 
     constructor(
         private readonly acteurService : ActeurService,
@@ -45,12 +43,6 @@ export class ActeurPageComponent {
         this.acteurService.createActeur(acteur).subscribe(value => {
             this.acteurs.push(value);
             this.ntfService.success("Création de l'acteur avec succès")
-            if(this.form) {
-                this.form.acteur = {
-                    prenom: "",
-                    nom: ""
-                } as IActeur
-            }
         }, () => this.ntfService.error("Création de l'acteur avec erreur"))
     }
 
