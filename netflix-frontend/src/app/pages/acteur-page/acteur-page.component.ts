@@ -15,7 +15,9 @@ import { NotificationService } from '../../services/notification.service';
 export class ActeurPageComponent {
 
     public acteurs : IActeur[] = [];
-    public acteur  ?: IActeurCreate;
+    public acteur  : IActeurCreate = {
+        nom: "", prenom: ""
+    };
 
     constructor(
         private readonly acteurService : ActeurService,

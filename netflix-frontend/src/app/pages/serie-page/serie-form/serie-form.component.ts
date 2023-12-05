@@ -12,25 +12,15 @@ import { ISerie, ISerieCreate } from '../../../models/serie.models';
 })
 export class SerieFormComponent {
 
-  @Input() set serie(value: ISerie | undefined) {
-    this.serieUpdate = {
-      nom: value?.nom || "",
-      date_sortie: value?.date_sortie || new Date(),
-      description: value?.description || ""
-    }
-  }
-
-  public serieUpdate : ISerieCreate = {
-    nom: "",
-    date_sortie: new Date(),
-    description: ""
+  @Input() set serie(serie: ISerieCreate) {
+    this.serie = serie
   }
 
   @Output() public create : EventEmitter<ISerieCreate> = new EventEmitter();
 
   public submit(form : NgForm) : void {
     if(form.valid) {
-      this.create.emit(this.serieUpdate)
+      this.create.emit(this.serie)
       form.reset(this.serie)
     }
   }

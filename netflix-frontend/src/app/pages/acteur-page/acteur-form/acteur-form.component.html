@@ -1,13 +1,13 @@
 <form #form="ngForm" (ngSubmit)="submit(form)">
     <div>
         <label for="prenom">Prénom&nbsp;:</label>
-        <input id="prenom" type="text" name="prenom" #prenom="ngModel" [(ngModel)]="acteurUpdate.prenom" maxlength="50" required>
+        <input id="prenom" type="text" name="prenom" #prenom="ngModel" [(ngModel)]="acteur.prenom" maxlength="50" required>
         <span style="color:#e74c3c" *ngIf="!prenom.valid && prenom.errors?.['required'] && prenom.dirty">Le champs est requis</span>
         <span style="color:#e74c3c" *ngIf="!prenom.valid && prenom.errors?.['maxlength'] && prenom.dirty">Le champs est trop long</span>
     </div>
     <div>
       <label for="nom">Nom&nbsp;:</label>
-      <input id="nom" type="text" name="nom" #nom="ngModel" [(ngModel)]="acteurUpdate.nom" maxlength="50" required>
+      <input id="nom" type="text" name="nom" #nom="ngModel" [(ngModel)]="acteur.nom" maxlength="50" required>
       <span style="color:#e74c3c" *ngIf="!nom.valid && nom.errors?.['required'] && nom.dirty">Le champs est requis</span>
       <span style="color:#e74c3c" *ngIf="!nom.valid && nom.errors?.['maxlength'] && nom.dirty">Le champs est trop long</span>
     </div>

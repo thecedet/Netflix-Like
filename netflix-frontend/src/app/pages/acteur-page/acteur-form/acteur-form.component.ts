@@ -12,16 +12,8 @@ import { IActeur, IActeurCreate } from '../../../models/acteur.models';
 })
 export class ActeurFormComponent {
 
-  @Input() set acteur(value: IActeurCreate | undefined) {
-    this.acteur = {
-      nom: value?.nom || "",
-      prenom: value?.prenom || ""
-    }
-  }
-
-  public acteurUpdate : IActeurCreate = {
-    nom: "",
-    prenom: ""
+  @Input() set acteur(value: IActeurCreate) {
+    this.acteur = value
   }
 
   @Output() public createActeur : EventEmitter<IActeurCreate> = new EventEmitter();
@@ -30,7 +22,7 @@ export class ActeurFormComponent {
 
   public submit(form : NgForm) : void {
     if(form.valid) {
-      this.createActeur.emit(this.acteurUpdate)
+      this.createActeur.emit(this.acteur)
       form.reset(this.acteur)
     }
   }

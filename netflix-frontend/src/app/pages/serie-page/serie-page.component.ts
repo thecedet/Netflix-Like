@@ -15,6 +15,11 @@ import { NotificationService } from '../../services/notification.service';
 export class SeriePageComponent {
 
     public series : ISerieSummary[] = [];
+    public serie  : ISerieCreate = {
+        date_sortie: new Date(),
+        description: "",
+        nom: ""
+    };
 
     constructor(
         private readonly serieService : SerieService,
