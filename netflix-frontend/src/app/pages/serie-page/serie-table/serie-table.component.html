@@ -1,0 +1,19 @@
+<table id="customers">
+    <tr>
+      <th>Image</th>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Date de sortie</th>
+      <th>Note moyenne</th>
+      <th>Action</th>
+    </tr>
+
+    <tr *ngFor="let serie of series" appTableSetColor="{{ serie.note_moyenne }}">
+        <td><img *ngIf="serie.image" [src]="serie.image" (error)="onErrorImage()"/></td>
+        <td>{{ serie.nom }}</td>
+        <td>{{ serie.description }}</td>
+        <td>{{ serie.date_sortie }}</td>
+        <td>{{ serie.note_moyenne }}</td>
+        <button (click)="navigateToDetails(serie.id)">Details</button>
+    </tr>
+  </table>

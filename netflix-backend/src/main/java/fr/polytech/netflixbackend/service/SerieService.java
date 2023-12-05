@@ -80,7 +80,7 @@ public class SerieService {
         SerieEntity serie = this.getSerie(id);
         serie.setJacquette(true);
         serieRepository.save(serie);
-        return s3Service.getImageUrl(id, serieBucket);
+        return s3Service.putImageUrl(id, serieBucket);
     }
 
     public SerieEntity addActeur(Integer idSerie, Integer idActeur) {
