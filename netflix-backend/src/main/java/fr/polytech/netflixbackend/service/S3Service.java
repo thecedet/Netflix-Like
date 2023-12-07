@@ -2,6 +2,7 @@ package fr.polytech.netflixbackend.service;
 
 import org.springframework.stereotype.Service;
 
+import fr.polytech.netflixbackend.exception.ResourceBadRequestException;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.http.Method;
@@ -23,9 +24,8 @@ public class S3Service {
                     .build()
             );
         }catch (Exception e){
-            System.out.println(e);
+            throw new ResourceBadRequestException(e.getMessage());
         }
-        return "";
     }
 
     public String getImageUrl(Integer id, String acteurBucket) {
