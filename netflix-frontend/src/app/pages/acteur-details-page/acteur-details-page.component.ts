@@ -6,15 +6,15 @@ import { IActeur, IActeurUpdate } from '../../models/acteur.models';
 import { Observable } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import { InputFileComponent } from "../../components/input-file/input-file.component";
-import { ActeurDetailsImageComponent } from "./acteur-details-image/acteur-details-image.component";
 import { IMessage } from '../../models/message.models';
+import { ImageComponent } from "../../components/image/image.component";
 
 @Component({
     selector: 'app-acteur-details-page',
     standalone: true,
     templateUrl: './acteur-details-page.component.html',
     styleUrl: './acteur-details-page.component.css',
-    imports: [ActeurDetailsFormComponent, InputFileComponent, ActeurDetailsImageComponent]
+    imports: [ActeurDetailsFormComponent, InputFileComponent, ImageComponent]
 })
 export class ActeurDetailsPageComponent {
 

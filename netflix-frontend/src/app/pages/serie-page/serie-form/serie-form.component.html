@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="submit(form)">
+<form #form="ngForm" (ngSubmit)="submit(form)" *ngIf="serie !== undefined">
     <div>
         <label for="nom">Nom&nbsp;:</label>
         <input id="nom" type="text" name="nom" #nom="ngModel" [(ngModel)]="serie.nom" maxlength="50" required>

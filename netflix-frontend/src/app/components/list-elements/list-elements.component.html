@@ -1,0 +1,6 @@
+<div>
+    <div *ngFor="let item of items" (click)="navigateToDetails(item.id)">
+        <img *ngIf="item.image" [src]="item.image" (error)="onErrorImage()"/>
+        <span>{{item.nom}} {{item.prenom}}</span>
+    </div>
+</div>

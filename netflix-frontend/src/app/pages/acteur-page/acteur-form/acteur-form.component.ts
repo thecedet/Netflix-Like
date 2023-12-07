@@ -12,9 +12,7 @@ import { IActeur, IActeurCreate } from '../../../models/acteur.models';
 })
 export class ActeurFormComponent {
 
-  @Input() set acteur(value: IActeurCreate) {
-    this.acteur = value
-  }
+  @Input() acteur ?: IActeurCreate;
 
   @Output() public createActeur : EventEmitter<IActeurCreate> = new EventEmitter();
 

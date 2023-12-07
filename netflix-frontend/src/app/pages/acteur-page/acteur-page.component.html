@@ -1,4 +1,4 @@
 <h1>Ajouter un acteur</h1>
 <app-acteur-form (createActeur)="createActeur($event)" [acteur]="acteur"></app-acteur-form>
 <h1>Liste des acteurs</h1>
-<app-acteur-list [acteurs]="acteurs"></app-acteur-list>
+<app-list-elements [items]="acteurs" path="acteurs"></app-list-elements>

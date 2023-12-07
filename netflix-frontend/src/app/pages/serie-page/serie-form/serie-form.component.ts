@@ -12,9 +12,8 @@ import { ISerie, ISerieCreate } from '../../../models/serie.models';
 })
 export class SerieFormComponent {
 
-  @Input() set serie(serie: ISerieCreate) {
-    this.serie = serie
-  }
+
+  @Input() public serie ?: ISerieCreate;
 
   @Output() public create : EventEmitter<ISerieCreate> = new EventEmitter();
 

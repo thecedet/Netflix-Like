@@ -31,7 +31,8 @@ export class SeriePageComponent {
             next: series => {
                 this.series = series;
                 series.forEach(serie => this.getImage(serie))
-            }
+            },
+            error: () => this.ntfService.error("Impossible de récupérer les séries")
         })
     }
 

@@ -24,7 +24,7 @@ export class SerieTableComponent {
     this.router.navigate([`series/${id}`])
   }
 
-  @Input() public series: ISerieSummary[] = [];
+  @Input() public series ?: ISerieSummary[];
 
   public onErrorImage() : void {
     this.ntfService.error("Impossible de charger les images")

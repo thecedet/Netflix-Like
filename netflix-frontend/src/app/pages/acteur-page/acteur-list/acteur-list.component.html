@@ -1,6 +1,0 @@
-<div>
-    <div *ngFor="let acteur of acteurs" (click)="navigateToDetails(acteur.id)">
-        <img *ngIf="acteur.image" [src]="acteur.image" (error)="onErrorImage()"/>
-        <span>{{acteur.nom}} {{acteur.prenom}}</span>
-    </div>
-</div>

@@ -1,1 +1,18 @@
-<p>serie-details-page works!</p>
+<br><a href="/series">back to serie</a>
+
+<div *ngIf="serie !== undefined">
+    <h1>{{ serie.nom }} ({{ serie.date_sortie }})</h1>
+
+    <app-image [image]="image" (uploadImage)="uploadImage($event)"></app-image>
+
+    <p>{{ serie.description }}</p>
+
+    <h1>Commentaires (note moyenne: {{ serie.note_moyenne }})</h1>
+
+    <app-commentaire-form></app-commentaire-form>
+    <app-commentaire-table></app-commentaire-table>
+
+    <h1>Acteurs</h1>
+    <app-acteur-form></app-acteur-form>
+    <app-list-elements [items]="serie.acteurs" path="z"></app-list-elements>
+</div>

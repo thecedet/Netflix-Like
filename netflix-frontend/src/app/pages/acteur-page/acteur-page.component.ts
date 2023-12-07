@@ -1,16 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActeurFormComponent } from "./acteur-form/acteur-form.component";
-import { ActeurListComponent } from "./acteur-list/acteur-list.component";
 import { IActeur, IActeurCreate } from '../../models/acteur.models';
 import { ActeurService } from '../../services/acteur.service';
 import { NotificationService } from '../../services/notification.service';
+import { ListElementsComponent } from "../../components/list-elements/list-elements.component";
 
 @Component({
     selector: 'app-acteur-page',
     standalone: true,
     templateUrl: './acteur-page.component.html',
     styleUrl: './acteur-page.component.css',
-    imports: [ActeurFormComponent, ActeurListComponent]
+    imports: [ActeurFormComponent, ListElementsComponent]
 })
 export class ActeurPageComponent {
 
