@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -33,10 +33,12 @@ export class InputFileComponent {
     
   }
 
-  public onUpload() : void {
+  public onUpload(input : HTMLInputElement) : void {
     if(this.file) {
       this.ntfService.warning("Téléversement en cours de l'image")
       this.uploadFile.emit(this.file)
+      this.file = undefined;
+      input.value = '';
     }
   }
 
