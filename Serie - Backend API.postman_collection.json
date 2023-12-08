@@ -55,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nom\": \"Mon voisin titi\",\r\n    \"description\": \"Deux petites filles, Mei, quatre ans, et Satsuki, 10 ans, s'installent dans une grande maison à la campagne avec leur père pour se rapprocher de l'hôpital où séjourne leur mère.\",\r\n    \"date_sortie\": \"08-12-1999\"\r\n}",
+							"raw": "{\r\n    \"nom\": \"Mon voisin rara\",\r\n    \"description\": \"Deux petites filles, Mei, quatre ans, et Satsuki, 10 ans, s'installent dans une grande maison à la campagne avec leur père pour se rapprocher de l'hôpital où séjourne leur mère.\",\r\n    \"date_sortie\": \"08-12-1999\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,6 +71,103 @@
 							"port": "8080",
 							"path": [
 								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer image serie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/1/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter image serie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/1/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Minio] Ajouter image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/PC/Desktop/Netflix/images/acteurs/totoro.jpg"
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9000/exocover/1?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=VuHtZ5Cl5gLInCfACP5D%2F20231205%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231205T123619Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f19b925c687d54218b8d82647b7b777b65b7b05a894b51ef6da7bcdba80a5a7b",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"exocover",
+								"1"
+							],
+							"query": [
+								{
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
+								},
+								{
+									"key": "X-Amz-Credential",
+									"value": "VuHtZ5Cl5gLInCfACP5D%2F20231205%2Fus-east-1%2Fs3%2Faws4_request"
+								},
+								{
+									"key": "X-Amz-Date",
+									"value": "20231205T123619Z"
+								},
+								{
+									"key": "X-Amz-Expires",
+									"value": "604800"
+								},
+								{
+									"key": "X-Amz-SignedHeaders",
+									"value": "host"
+								},
+								{
+									"key": "X-Amz-Signature",
+									"value": "f19b925c687d54218b8d82647b7b777b65b7b05a894b51ef6da7bcdba80a5a7b"
+								}
 							]
 						}
 					},
@@ -124,6 +221,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Ajouter un acteur à une série",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/1/acteur/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"1",
+								"acteur",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -137,7 +256,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"auteur\": \"Clément\",\r\n    \"note\": 4,\r\n    \"commentaire\": \"ça passe mais c'est pour les enfants\"\r\n}",
+							"raw": "{\r\n    \"auteur\": \"Clément\",\r\n    \"note\": 1,\r\n    \"commentaire\": \"il est bien mais c'est mauvais\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,7 +285,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/commentaires/2",
+							"raw": "http://localhost:8080/commentaires/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -174,7 +293,7 @@
 							"port": "8080",
 							"path": [
 								"commentaires",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -187,7 +306,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"commentaire\": \"ça passe\"\r\n}",
+							"raw": "{\r\n    \"note\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,42 +331,179 @@
 			]
 		},
 		{
-			"name": "S3",
+			"name": "Acteur",
 			"item": [
 				{
-					"name": "Obtenir URL pour poster image lien upload (exocover)",
+					"name": "Récupérer tous les acteurs",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/series/1/cover",
+							"raw": "http://localhost:8080/acteurs",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"series",
-								"1",
-								"cover"
+								"acteurs"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Envoyer Image sur S3",
+					"name": "Récupérer un acteur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acteurs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter un acteur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"DORLETTE\",\r\n    \"prenom\": \"Clément\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/acteurs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un acteur",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"DORLETTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/acteurs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un acteur",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acteurs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer image acteur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acteurs/2/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs",
+								"2",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter image acteur",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acteurs/2/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acteurs",
+								"2",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Minio] Ajouter image",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": "/C:/Users/PC/Desktop/Dessin1.png"
+								"src": "/C:/Users/PC/Desktop/Netflix/images/acteurs/chat-bus.jpg"
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:9000/exocover/1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=VuHtZ5Cl5gLInCfACP5D%2F20231125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231125T142442Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=188c5b6f78ea478276a10d037f686fd07f6e4c28e6755f3edd9d00dd5978a886",
+							"raw": "http://127.0.0.1:9000/exoacteur/2?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=VuHtZ5Cl5gLInCfACP5D%2F20231203%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231203T172408Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=31f895708da72fa74c3389e546efb9144664f52cf716f496f802baed159ca47c",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -257,8 +513,8 @@
 							],
 							"port": "9000",
 							"path": [
-								"exocover",
-								"1.png"
+								"exoacteur",
+								"2"
 							],
 							"query": [
 								{
@@ -267,11 +523,11 @@
 								},
 								{
 									"key": "X-Amz-Credential",
-									"value": "VuHtZ5Cl5gLInCfACP5D%2F20231125%2Fus-east-1%2Fs3%2Faws4_request"
+									"value": "VuHtZ5Cl5gLInCfACP5D%2F20231203%2Fus-east-1%2Fs3%2Faws4_request"
 								},
 								{
 									"key": "X-Amz-Date",
-									"value": "20231125T142442Z"
+									"value": "20231203T172408Z"
 								},
 								{
 									"key": "X-Amz-Expires",
@@ -283,18 +539,10 @@
 								},
 								{
 									"key": "X-Amz-Signature",
-									"value": "188c5b6f78ea478276a10d037f686fd07f6e4c28e6755f3edd9d00dd5978a886"
+									"value": "31f895708da72fa74c3389e546efb9144664f52cf716f496f802baed159ca47c"
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtenir URL pour récupérer image",
-					"request": {
-						"method": "GET",
-						"header": []
 					},
 					"response": []
 				}
